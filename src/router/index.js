@@ -1,23 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+/**
+ * Vue Router
+ * @description: Vue Router configuration
+ * @docs: https://router.vuejs.org/
+ */
+import {createRouter, createWebHistory} from "vue-router";
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
-
-export default router
+  history: createWebHistory(),
+  routes: [],
+});
+/**
+ * Set Business name as prefix for each page title
+ */
+router.beforeEach((to, from, next) => {
+  let baseTitle = 'ACME Learning Center';
+  document.title = `${baseTitle} | ${to.meta['title']}`;
+  next();
+});
+export default router;
